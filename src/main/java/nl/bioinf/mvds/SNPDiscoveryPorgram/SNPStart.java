@@ -1,5 +1,6 @@
 package nl.bioinf.mvds.SNPDiscoveryPorgram;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,21 +10,27 @@ import static java.lang.Integer.parseInt;
 
 public class SNPStart {
     private final int position;
+    private String filename = "homologene.txt";
     private final String mutation;
-    private final List<String> seqs = new ArrayList<>();
+    private List<String> seqs = new ArrayList<>();
     private final Map<Integer, String> sequences = new HashMap<>();
     private final Map<String, Integer> acids = new HashMap<>();
 
-    public SNPStart(String[] args) {
+    public SNPStart(String[] args) throws FileNotFoundException {
         this.position = parseInt(args[0]);
         this.mutation = args[1].toUpperCase();
+        
+        readingFile();
 
-        this.seqs.add("ACTGACCAGT");
-        this.seqs.add("ACGTGCAACGACTCAGCTACGC");
-        this.seqs.add("ACCT");
+
         creatingHashMap();
         getAminoAcids();
         calculateScoreOfAminoAcids();
+    }
+    
+    public void readingFile() throws FileNotFoundException {
+        ReadingFastaFiles file = new ReadingFastaFiles();
+        this.seqs = file.readFastaFile(filename);
     }
 
     public void creatingHashMap() {

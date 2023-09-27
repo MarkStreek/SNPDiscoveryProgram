@@ -1,16 +1,15 @@
 package nl.bioinf.mvds.SNPDiscoveryPorgram;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.FileNotFoundException;
+
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Main main = new Main();
         main.start(args);
     }
 
-    private void start(String[] args) {
+    private void start(String[] args) throws FileNotFoundException {
         SNPStart snp = new SNPStart(args);
     }
 }
